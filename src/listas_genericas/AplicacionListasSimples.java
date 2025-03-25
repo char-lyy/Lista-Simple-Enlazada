@@ -1,6 +1,6 @@
 package listas_genericas;
 
-import entidades.Persona;
+import entidades.Cancion;
 import utilidades.GestorEntradaConsola;
 import utilidades.GestorSalidaConsola;
 
@@ -12,29 +12,31 @@ import utilidades.GestorSalidaConsola;
 public class AplicacionListasSimples {
 
     private static final int LIMITES_CARACTER_CONSOLA = 120;
-    private ListaSimple listaPersonas;
+    private ListaSimple listaCanciones;
 
     void inicializar() {
-        listaPersonas = new ListaSimple();
+        listaCanciones = new ListaSimple();
     }
 
     void cargarCasosDePrueba() {
 
-        Persona p1 = new Persona(12345678, "Juan Perez", "10x5 Siglo XX", 25);
-        Persona p2 = new Persona(87654321, "Maria Gomez", "3x9 Siglo XIX", 16);
-        Persona p3 = new Persona(45678912, "Carlos Lopez", "Ax8 Vinalar", 42);
-        Persona p4 = new Persona(98765432, "Ana Martinez", "20x32 Siglo XXI", 30);
-        Persona p5 = new Persona(34567891, "Lucia Fernandez", "Av. Belgrano 1654", 14);
-        Persona p6 = new Persona(65432198, "Pedro Garcia", "Guemes 333", 73);
-        Persona p7 = new Persona(56789123, "Sofia Ruiz", "Japon 125", 11);
+        Cancion c1 = new Cancion("Mostly Clear Skies", "True Lust", 2.47f, "Rock");
+        Cancion c2 = new Cancion("War Inside My Head", "Suicidal Tendencies", 4.57f, "Trash");
+        Cancion c3 = new Cancion("Flor de lino", "Horacio Molina", 3.33f, "Vals");
+        Cancion c4 = new Cancion("Stargezer", "Rainbow", 8.27f, "Neo-Classical Rock");
+        Cancion c5 = new Cancion("Bohemian Rhapsody", "Queen", 5.55f, "Rock");
+        Cancion c6 = new Cancion("Stairway to Heaven", "Led Zeppelin", 8.02f, "Rock");
+        Cancion c7 = new Cancion("Toccata and Fugue", "J.S. Bach", 5.01f, "Baroque");
 
-        listaPersonas.insertarFrente(p1);
-        listaPersonas.insertarFrente(p2);
-        listaPersonas.insertarFrente(p3);
-        listaPersonas.insertarFrente(p4);
-        listaPersonas.insertarFrente(p5);
-        listaPersonas.insertarFrente(p6);
-        listaPersonas.insertarFrente(p7);
+
+        listaCanciones.insertarFrente(c1);
+        listaCanciones.insertarFrente(c2);
+        listaCanciones.insertarFrente(c3);
+        listaCanciones.insertarFrente(c4);
+        listaCanciones.insertarFrente(c5);
+        listaCanciones.insertarFrente(c6);
+        listaCanciones.insertarFrente(c7);
+
     }
 
     void menu() {
@@ -44,10 +46,10 @@ public class AplicacionListasSimples {
             mostrarOpciones();
             switch (opcion = GestorEntradaConsola.leerEntero()) {
                 case 1:
-                    cargarNuevaPersona();
+                    cargarNuevaCancion();
                     break;
                 case 2:
-                    listaPersonas.mostrar();
+                    listaCanciones.mostrar();
                     break;
                 case 3:
                     listarTabulado();
@@ -56,10 +58,10 @@ public class AplicacionListasSimples {
                     actualizarPersona();
                     break;
                 case 5:
-                    eliminarPersonas();
+                    eliminarCanciones();
                     break;
                 case 6:
-                    listarPersonasMayores18();
+                    listarCancionesMenoresQue5();
                     break;
             }
         } while (opcion != 0);
@@ -67,21 +69,21 @@ public class AplicacionListasSimples {
 
     void mostrarOpciones() {
         System.out.println("*** App Listas Simples ***");
-        System.out.println("1. Cargar persona");
-        System.out.println("2. Listar personas");
-        System.out.println("3. Listar personas (Formato tabla)");
-        System.out.println("4. Actualizar persona");
-        System.out.println("5. Eliminar persona");
-        System.out.println("6. Listar personas con edad mayor o igual a 18");
+        System.out.println("1. Cargar cancion");
+        System.out.println("2. Listar canciones");
+        System.out.println("3. Listar canciones (Formato tabla)");
+        System.out.println("4. Actualizar cancion");
+        System.out.println("5. Eliminar cancion");
+        System.out.println("6. Listar canciones con duracion menor a 5 minutos");
         System.out.println("0. Salir");
     }
 
-    void cargarNuevaPersona() {
+    void cargarNuevaCancion() {
 
         do {
-            Persona nuevaPersona = new Persona();
-            nuevaPersona.cargarDatos();
-            listaPersonas.insertarFrente(nuevaPersona);
+            Cancion nuevaCancion = new Cancion();
+            nuevaCancion.cargarDatos();
+            listaCanciones.insertarFrente(nuevaCancion);
         } while (GestorEntradaConsola.confirmar());
 
     }
@@ -91,8 +93,8 @@ public class AplicacionListasSimples {
      * enlazada
      */
     void listarTabulado() {
-        GestorSalidaConsola.generarTitulosColumnas(Persona.class, LIMITES_CARACTER_CONSOLA);
-        NodoSimple actual = listaPersonas.getPrimero();
+        GestorSalidaConsola.generarTitulosColumnas(Cancion.class, LIMITES_CARACTER_CONSOLA);
+        NodoSimple actual = listaCanciones.getPrimero();
         while (actual != null) {
 
             GestorSalidaConsola.mostrarTabulado(actual.getDato().getClass(), actual.getDato(), LIMITES_CARACTER_CONSOLA);
@@ -105,9 +107,9 @@ public class AplicacionListasSimples {
      */
     void actualizarPersona() {
 
-        Persona personaBuscada = new Persona();
-        personaBuscada.cargarDni();
-        NodoSimple nodoBuscado = listaPersonas.buscar(personaBuscada);
+        Cancion cancionBuscada = new Cancion();
+        cancionBuscada.cargarTitulo();
+        NodoSimple nodoBuscado = listaCanciones.buscar(cancionBuscada);
 
         if (nodoBuscado != null) {
 
@@ -115,7 +117,7 @@ public class AplicacionListasSimples {
 
         } else {
 
-            System.out.println("La persona no se encuentra en la lista");
+            System.out.println("La cancion no se encuentra en la lista");
 
         }
 
@@ -125,34 +127,34 @@ public class AplicacionListasSimples {
      * Elimina una persona de una lista simple enlazada hasta que el usuario
      * desee no continuar
      */
-    void eliminarPersonas() {
+    void eliminarCanciones() {
         do {
-            Persona personaBuscada = new Persona();
-            personaBuscada.cargarDni();
-            NodoSimple nodoBuscado = listaPersonas.eliminar(personaBuscada);
+            Cancion cancionBuscada = new Cancion();
+            cancionBuscada.cargarTitulo();
+            NodoSimple nodoBuscado = listaCanciones.eliminar(cancionBuscada);
 
             if (nodoBuscado != null) {
 
-                System.out.println("La persona: ");
-                GestorSalidaConsola.mostrarTabulado(Persona.class, nodoBuscado.getDato(), LIMITES_CARACTER_CONSOLA);
+                System.out.println("La cancion: ");
+                GestorSalidaConsola.mostrarTabulado(Cancion.class, nodoBuscado.getDato(), LIMITES_CARACTER_CONSOLA);
                 System.out.println("Fue quitada de la lista");
 
             } else {
 
-                System.out.println("La persona no se encuentra en la lista");
+                System.out.println("La cancion no se encuentra en la lista");
 
             }
 
         } while (GestorEntradaConsola.confirmar());
     }
 
-    void listarPersonasMayores18() {
+    void listarCancionesMenoresQue5() {
 
-        NodoSimple nodoActual = listaPersonas.getPrimero();
+        NodoSimple nodoActual = listaCanciones.getPrimero();
 
         while (nodoActual != null) {
 
-            if (nodoActual.getDato().getEdad() >= 18) {
+            if (nodoActual.getDato().getDuracion() < 5.00) {
                 System.out.println(nodoActual.getDato().toString());
             }
             nodoActual = nodoActual.getSiguiente();

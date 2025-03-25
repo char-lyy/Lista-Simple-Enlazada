@@ -1,6 +1,6 @@
 package listas_genericas;
 
-import entidades.Persona;
+import entidades.Cancion;
 
 /**
  *
@@ -17,11 +17,11 @@ public class ListaSimple {
     /**
      * Inserta un elemento al frente de la lista enlazada.
      *
-     * @param persona la persona que se almacenara en un nodo e insertará al
+     * @param cancion la cancion que se almacenara en un nodo e insertará al
      * frente.
      */
-    public void insertarFrente(Persona persona) {
-        insertarFrente(new NodoSimple(persona));
+    public void insertarFrente(Cancion cancion) {
+        insertarFrente(new NodoSimple(cancion));
     }
 
     /**
@@ -37,8 +37,8 @@ public class ListaSimple {
     }
 
     /**
-     * Muestra las personas de la lista. La clase persona debe tener
-     * implementado el metodo toString.
+     * Muestra las canciones de la lista. La clase debe tener implementado el
+     * metodo toString.
      */
     public void mostrar() {
         NodoSimple p = primero;
@@ -51,20 +51,19 @@ public class ListaSimple {
     /**
      * Busca un nodo en una lista enlazada simple comparando el dato almacenado.
      *
-     * La comparación se realiza utilizando el método {@code compareTo()} del
-     * elemento proporcionado y los datos almacenados en los nodos.
+     * La comparación se realiza comparando los titulos de las canciones
      *
-     * @param buscado el elemento a buscar.
+     * @param cancionBuscada el elemento a buscar.
      * @return el nodo que contiene el elemento buscado, o {@code null} si no se
      * encuentra.
      */
-    public NodoSimple buscar(Persona buscado) {
+    public NodoSimple buscar(Cancion cancionBuscada) {
 
         NodoSimple resultado = null;
         NodoSimple actual = primero;
         boolean busqueda = false;
         while (actual != null && !busqueda) {
-            if (buscado.getDni() == actual.getDato().getDni()) {
+            if (cancionBuscada.getTitulo().equals(actual.getDato().getTitulo())) {
                 busqueda = true;
                 resultado = actual;
             } else {
@@ -78,17 +77,14 @@ public class ListaSimple {
      * Elimina un nodo de la lista enlazada que contiene un dato igual al
      * proporcionado.
      *
-     * La búsqueda y comparación del dato se realizan utilizando el método
-     * {@code compareTo()}. Si el nodo es encontrado, se elimina de la lista y
-     * se retorna. Si no se encuentra, se muestra un mensaje indicándolo y se
-     * retorna {@code null}.
+     * La búsqueda y comparación del dato se realizan comparando los titulos.
      *
-     * @param buscado la persona a buscar y comparar para determinar el nodo a
+     * @param cancionBuscada la cancion a buscar y comparar para determinar el nodo a
      * eliminar.
      * @return el nodo eliminado si se encuentra, o {@code null} si no existe o
      * la lista está vacía.
      */
-    public NodoSimple eliminar(Persona buscado) {
+    public NodoSimple eliminar(Cancion cancionBuscada) {
 
         if (primero == null) {
             System.out.println("Lista vacia!");
@@ -101,7 +97,7 @@ public class ListaSimple {
 
         boolean busqueda = false;
         while (actual != null & !busqueda) {
-            if (buscado.getDni() == actual.getDato().getDni()) {
+            if (cancionBuscada.getTitulo().equals(actual.getDato().getTitulo())) {
                 busqueda = true;
             } else {
                 anterior = actual;

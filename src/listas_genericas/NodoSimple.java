@@ -1,6 +1,7 @@
 package listas_genericas;
 
-import entidades.Persona;
+import entidades.Cancion;
+
 
 /**
  * Representa un nodo simple de una estructura de datos enlazada.
@@ -9,18 +10,18 @@ import entidades.Persona;
  */
 public class NodoSimple {
 
-    private Persona dato;
+    private Cancion dato;
     private NodoSimple siguiente;
 
-    public NodoSimple(Persona dato) {
+    public NodoSimple(Cancion dato) {
         this.dato = dato;
     }
 
-    public Persona getDato() {
+    public Cancion getDato() {
         return dato;
     }
 
-    public void setDato(Persona dato) {
+    public void setDato(Cancion dato) {
         this.dato = dato;
     }
 
